@@ -1,0 +1,66 @@
+<ion-header no-border class="header-bg">
+  <ion-navbar transparent no-padding color="light" hideBackButton>
+    <ion-buttons left>
+      <button
+        class="button_shadow"
+        ion-button
+        icon-only
+        (click)="navCtrl.pop()"
+      >
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bg-style">
+  <ion-item
+    [ngStyle]="{'background-image': 'url(' + placeholder + ')'}"
+    class="detail-back bg-style"
+  >
+    <img
+      src="https://image.tmdb.org/t/p/w500{{filmInfo?.poster_path}}"
+      width="96px"
+      height="auto"
+    />
+    <div class="flytta">
+      <h1 *ngIf="check == 0">{{filmInfo?.name}}</h1>
+      <h3 *ngIf="check == 0 && filmInfo?.created_by.length != 0">
+        Created by {{filmInfo?.created_by[0].name}}
+      </h3>
+      <h6 *ngIf="check == 0">{{(filmInfo?.first_air_date).slice(0,4)}}</h6>
+
+      <h1 *ngIf="check == 1">{{filmInfo?.title}}</h1>
+      <h3 *ngIf="check == 1 && filmInfo?.credits.crew.length != 0">
+        Directed by {{filmInfo?.credits.crew[0].name}}
+      </h3>
+      <h3 *ngIf="check == 1">
+        {{(filmInfo?.release_date).slice(0,4)}} | {{filmInfo?.runtime}}mins
+      </h3>
+    </div>
+  </ion-item>
+  <ion-fab right bottom>
+    <button
+      mini
+      ion-fab
+      round
+      color="danger"
+      *ngIf=" check == 0"
+      (click)="removeFromListTV(i);"
+    >
+      <ion-icon name="md-remove" class="custom-icon"></ion-icon>
+    </button>
+    <button
+      mini
+      ion-fab
+      round
+      color="danger"
+      *ngIf=" check == 1"
+      (click)="removeFromList(i);"
+    >
+      <ion-icon name="md-remove" class="custom-icon"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-item class="flyttaner bg-style" no-lines>
+    <p text-wrap>{{filmInfo?.overview}}</p>
+  </ion-item>
+</ion-content>

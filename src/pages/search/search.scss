@@ -1,0 +1,20 @@
+page-search {
+  ion-thumbnail img {
+    height: auto !important;
+  }
+
+  h2 {
+    word-wrap: break-word;
+  }
+
+  ion-label {
+    margin: 0 !important;
+  }
+  .slide-zoom {
+    height: 100%;
+    overflow-y: auto;
+  }
+  .segment-button {
+    color: #ffff8d;
+  }
+}

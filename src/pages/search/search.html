@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-segment
+    [(ngModel)]="selectedSegment"
+    (ionChange)="onSegmentChanged($event)"
+    color="sunshine"
+    class="segment-bg"
+  >
+    <ion-segment-button value="tv"> TV </ion-segment-button>
+    <ion-segment-button value="movie"> MOVIES </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content no-padding class="bg-style" has-footer>
+  <ion-slides #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+    <!-- TV -->
+    <ion-slide class="slide_zoom">
+      <ion-list>
+        <ion-item
+          *ngFor="let tv of detailsTV;let i = index;"
+          no-padding
+          text-wrap
+          class="bg-style"
+        >
+          <ion-item no-lines (click)="openDetailsTV(tv,-1,0)" class="bg-style">
+            <ion-thumbnail item-start class="bg-style">
+              <img
+                *ngIf="tv.poster_path != null;else placeholder_img"
+                src="https://image.tmdb.org/t/p/w500{{tv?.poster_path}}"
+              />
+              <ng-template #placeholder_img
+                ><img src="{{placeholder}}"
+              /></ng-template>
+            </ion-thumbnail>
+            <h2>{{tv.name}}</h2>
+            <h3>{{tv.first_air_date}}</h3>
+          </ion-item>
+          <button
+            *ngIf="checkRemove(tv.id,tvs);else add_button"
+            mini
+            item-end
+            ion-fab
+            round
+            color="danger"
+            (click)="removeFromListTV(i)"
+            text-wrap
+          >
+            -
+          </button>
+          <ng-template #add_button
+            ><button
+              mini
+              item-end
+              ion-fab
+              round
+              color="secondary"
+              (click)="saveToList(tv,'storageListTV')"
+              text-wrap
+            >
+              +
+            </button></ng-template
+          >
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+
+    <!-- MOVIE -->
+    <ion-slide>
+      <ion-list>
+        <ion-item
+          *ngFor="let film of details;let i = index;"
+          no-padding
+          text-wrap
+          class="bg-style"
+        >
+          <ion-item no-lines (click)="openDetails(film,-1,1)" class="bg-style">
+            <ion-thumbnail item-start class="bg-style">
+              <!-- <img src="{{film.Poster}}"> -->
+              <img
+                *ngIf="film.poster_path != null;else placeholder_img"
+                src="https://image.tmdb.org/t/p/w500{{film?.poster_path}}"
+              />
+              <ng-template #placeholder_img
+                ><img src="{{placeholder}}"
+              /></ng-template>
+            </ion-thumbnail>
+            <h2>{{film.title}}</h2>
+            <h3>{{film.release_date}}</h3>
+          </ion-item>
+          <button
+            *ngIf="checkRemove(film.id,films);else add_button"
+            mini
+            item-end
+            ion-fab
+            round
+            color="danger"
+            (click)="removeFromList(i)"
+            text-wrap
+          >
+            -
+          </button>
+          <ng-template #add_button
+            ><button
+              mini
+              item-end
+              ion-fab
+              round
+              color="secondary"
+              (click)="saveToList(film,'storageList')"
+              text-wrap
+            >
+              +
+            </button></ng-template
+          >
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer no-padding>
+  <ion-searchbar
+    *ngIf="selectedSegment == 'movie'; else other_bar"
+    placeholder="{{sQ}}"
+    no-padding
+    (search)="getItems($event)"
+    #searchbar
+  >
+  </ion-searchbar>
+
+  <ng-template #other_bar>
+    <ion-searchbar
+      placeholder="{{sQTV}}"
+      no-padding
+      (search)="getItemsTV($event)"
+      #searchbar
+    >
+    </ion-searchbar>
+  </ng-template>
+</ion-footer>

@@ -1,0 +1,65 @@
+page-upcoming {
+  ion-content {
+    overflow-y: auto !important;
+  }
+  // ion-slides {
+  //   height: initial;
+  // }
+
+  .slide-zoom {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  ion-thumbnail img {
+    height: auto !important;
+  }
+  ion-label {
+    margin: 0 !important;
+  }
+
+  // ion-scroll {
+  //   width: 100%;
+  //   height: 100%;
+  // }
+
+  h2 {
+    word-wrap: break-word;
+  }
+
+  .card-background-page {
+    background: #eee;
+    ion-card {
+      position: relative;
+      text-align: center;
+    }
+
+    .card-title {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.37);
+      top: 36%;
+      font-size: 1.5em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .card-subtitle {
+      background-color: rgba(0, 0, 0, 0.37);
+      font-size: 1em;
+      position: absolute;
+      top: 52%;
+      width: 100%;
+      color: #fff;
+    }
+
+    .card-subtitle2 {
+      background-color: rgba(0, 0, 0, 0.37);
+      font-size: 0.75em;
+      position: absolute;
+      top: 62%;
+      width: 100%;
+      color: #fff;
+    }
+  }
+}

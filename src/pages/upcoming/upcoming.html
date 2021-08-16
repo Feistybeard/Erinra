@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-segment
+    [(ngModel)]="selectedSegment"
+    (ionChange)="onSegmentChanged($event)"
+    color="sunshine"
+    class="segment-bg"
+  >
+    <ion-segment-button value="tv"> TV </ion-segment-button>
+    <ion-segment-button value="movie"> MOVIES </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content class="bg-style" class="card-background-page" no-padding>
+  <ion-slides #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+    <!-- ///////// TV MODE -->
+    <ion-slide class="slide-zoom">
+      <ion-item-group *ngFor="let group of sortedByDate; let i = index;">
+        <ion-item-divider sticky light class="bg-style2"
+          >{{group.sortedBy}}</ion-item-divider
+        >
+        <ion-item *ngFor="let tv of group.tvs" class="bg-style" no-lines>
+          <!-- <ion-item *ngFor="let items of upcomingTv, let y = index;" class="bg-style"> -->
+          <ion-thumbnail item-start>
+            <img src="https://image.tmdb.org/t/p/w500{{tv?.poster_path}}" />
+          </ion-thumbnail>
+          <h2>{{tv?.seriename}}</h2>
+          <h2>{{tv?.name}}</h2>
+          <h2>
+            S{{("00"+tv?.season_number).slice(-2)}}E{{("00"+tv?.episode_number).slice(-2)}}
+          </h2>
+          <h2>{{tv?.air_date}}</h2>
+        </ion-item>
+        <!-- </ion-item> -->
+      </ion-item-group>
+    </ion-slide>
+
+    <!-- ///////// MOVIE MODE -->
+    <ion-slide>
+      <ion-list>
+        <ion-item-group *ngFor="let group of sortedByYear">
+          <ion-item-divider sticky light class="bg-style2"
+            >{{group.sortedBy}}</ion-item-divider
+          >
+          <ion-item *ngFor="let item of group.films" class="bg-style" no-lines>
+            <ion-thumbnail item-start class="bg-style">
+              <img src="https://image.tmdb.org/t/p/w500{{item?.poster_path}}" />
+            </ion-thumbnail>
+            <h2>{{item?.title}}</h2>
+            <h3>{{item?.release_date}}</h3>
+            <h3>{{getReleaseDif(item)}} days left</h3>
+          </ion-item>
+        </ion-item-group>
+        <!-- <ion-item-group *ngFor="let group of sortedByYear">
+                <ion-item-divider sticky light class="bg-style2">{{group.sortedBy}}</ion-item-divider>
+                  <ion-item *ngFor="let item of group.films" class="bg-style" >
+                    <ion-card *ngIf="convertDate(item)">
+                      <ion-thumbnail item-start>
+                      <img src="https://image.tmdb.org/t/p/w500{{item?.poster_path}}">
+                      <div class="card-title">{{item?.title}}</div>
+                      <div class="card-subtitle">({{item?.release_date}})</div>
+                      <div class="card-subtitle2">({{getReleaseDif(item)}})</div>
+                      </ion-thumbnail>
+                      <h2>{{item?.title}}</h2>
+                      <h3>{{item?.release_date}}</h3>
+                    </ion-card>
+                  </ion-item>
+              </ion-item-group> -->
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
+  <!-- <ion-datetime displayFormat="MMM DD, h:mm A" [(ngModel)]="myDate"></ion-datetime> -->
+</ion-content>
