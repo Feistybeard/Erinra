@@ -1,6 +1,17 @@
 # Erinra
 The exam project for the university course 'Mobile web applications'
 
+<img src="Screenshot_20180111-122247.jpg"
+     height="600px"
+     width="auto"
+     alt="Erinra app"
+     style="float: left; margin-right: 10px;" />
+<img src="Screenshot_20180111-121219.jpg"
+     height="600px"
+     width="auto"
+     alt="Erinra app"
+     style="float: right; margin-right: 10px;" />
+
 👉 Please note that this has only been tested with NodeJS10, newer version might give errors! 👈
 
 ## To test run in a browser (Linux/MacOS):
